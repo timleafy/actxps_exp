@@ -395,6 +395,35 @@ span_percent_of <- function(tab, pct_of, conf_int) {
       gt::cols_move(pct_names[[3]], pct_names[[1]])
   }
 
+    tab <- tab |>
+      gt::tab_spanner(
+        text = "Export Table",
+        locations = gt::cells_title(groups = TRUE)
+      ) |>
+      gt::tab_source_note(
+        text = "Export table."
+      ) |>
+      gt::tab_options(
+        columnLabels.align = "center",
+        table.font.size = gt::pct(fontsize)
+      ) |>
+      gt::gtsave(
+        ui = gt::gtsave_button(target = "web", title = "HTML"),
+        filename = "table_export"
+      ) |>
+      gt::gtsave(
+        ui = gt::gtsave_button(target = "png", title = "PNG"),
+        filename = "table_export"
+      ) |>
+      gt::gtsave(
+        ui = gt::gtsave_button(target = "pdf", title = "PDF"),
+        filename = "table_export"
+      ) |>
+      gt::gtsave(
+        ui = gt::gtsave_button(target = "csv", title = "CSV"),
+        filename = "table_export"
+      )
+
   tab
 
 }
